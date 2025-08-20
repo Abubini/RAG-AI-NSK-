@@ -1,0 +1,44 @@
+{
+  "query": "what is file system",
+  "filters": {},
+  "documents": [
+    {
+      "page_content": "File system\n\nFile concept\n\ncomputers use various types of non-volatile storage devices (like HDDs, SSDs, tapes, etc.) to store data, and the operating system provides a consistent, logical view of this storage by using files. A file is a named collection of related information and is the smallest unit in which data can be stored on secondary storage. Files can contain different types of data such as text, programs, images, or system information and their structure depends on the type of content. The operating system abstracts physical storage through the use of files, making data storage and retrieval more manageable for users and applications\n\n\n\nFile attribute",
+      "metadata": {
+        "start_index": 0,
+        "chunk_size": 669,
+        "chunk_id": 0,
+        "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.docx"
+      }
+    },
+    {
+      "page_content": "File system\n\nFile concept\n\ncomputers use various types of non-volatile storage devices (like HDDs, SSDs, tapes, etc.) to store data, and the operating system provides a consistent, logical view of this storage by using files. A file is a named collection of related information and is the smallest unit in which data can be stored on secondary storage. Files can contain different types of data such as text, programs, images, or system information and their structure depends on the type of content. The operating system abstracts physical storage through the use of files, making data storage and retrieval more manageable for users and applications\n\nFile attribute",
+      "metadata": {
+        "source": "/tmp/tmpnun2_hhg.pptx",
+        "start_index": 0,
+        "chunk_size": 667,
+        "chunk_id": 0
+      }
+    },
+    {
+      "page_content": "Access rights Each process opens a file in an access mode. This information is stored on the per process table so the operating system can allow or deny subsequent I/O requests.\n\n\n\nFile types\n\nthe importance of file types in operating systems and how they help the system and applications interact appropriately with files. A common way to indicate a file's type is by using a file extension (e.g., .docx, .exe, .java). These extensions help identify what kind of file it is and what operations can be performed on it. While some operating systems rely on extensions to recognize file types, others treat them as hints for applications. Recognizing file types helps prevent errors, such as trying to read binary files as text, and allows programs to find and work with the files they expect.\n\n\n\nFile structure",
+      "metadata": {
+        "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.docx",
+        "start_index": 5339,
+        "chunk_id": 7,
+        "chunk_size": 809
+      }
+    },
+    {
+      "page_content": "6 | P a g e\n\n\n\nFile types\n\nthe importance of file types in operating systems and how they help the system and applications interact appropriately with files. A common way to indicate a file's type is by using a file extension (e.g., .docx, .exe, .java). These extensions help identify what kind of file it is and what operations can be performed on it. While some operating systems rely on extensions to recognize file types, others treat them as hints for applications. Recognizing file types helps prevent errors, such as trying to read binary files as text, and allows programs to find and work with the files they expect.\n\nFile structure",
+      "metadata": {
+        "source": "/tmp/tmpnun2_hhg.pptx",
+        "start_index": 5556,
+        "chunk_id": 7,
+        "chunk_size": 641
+      }
+    }
+  ],
+  "cached_at": "2025-08-20T19:20:15.957221",
+  "document_count": 4
+}

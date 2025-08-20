@@ -1,0 +1,44 @@
+{
+  "query": "what is file system?",
+  "filters": {},
+  "documents": [
+    {
+      "page_content": "File system\n\nFile concept\n\ncomputers use various types of non-volatile storage devices (like HDDs, SSDs, tapes, etc.) to store data, and the operating system provides a consistent, logical view of this storage by using files. A file is a named collection of related information and is the smallest unit in which data can be stored on secondary storage. Files can contain different types of data such as text, programs, images, or system information and their structure depends on the type of content. The operating system abstracts physical storage through the use of files, making data storage and retrieval more manageable for users and applications\n\n\n\nFile attribute",
+      "metadata": {
+        "start_index": 0,
+        "chunk_id": 0,
+        "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.docx",
+        "chunk_size": 669
+      }
+    },
+    {
+      "page_content": "File system\n\nFile concept\n\ncomputers use various types of non-volatile storage devices (like HDDs, SSDs, tapes, etc.) to store data, and the operating system provides a consistent, logical view of this storage by using files. A file is a named collection of related information and is the smallest unit in which data can be stored on secondary storage. Files can contain different types of data such as text, programs, images, or system information and their structure depends on the type of content. The operating system abstracts physical storage through the use of files, making data storage and retrieval more manageable for users and applications\n\nFile attribute",
+      "metadata": {
+        "chunk_id": 0,
+        "chunk_size": 667,
+        "source": "/tmp/tmpnun2_hhg.pptx",
+        "start_index": 0
+      }
+    },
+    {
+      "page_content": "For instance, UNIX treats files simply as streams of bytes, where each byte is addressable by its offset from the beginning of the file. This provides flexibility and simplicity, allowing any program to access any part of a file without needing to worry about record boundaries. The operating system handles packing and unpacking of bytes into physical disk blocks behind the scenes, allowing developers to focus on the logical structure of their data rather than physical disk limitations.",
+      "metadata": {
+        "chunk_size": 490,
+        "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.docx",
+        "chunk_id": 10,
+        "start_index": 7354
+      }
+    },
+    {
+      "page_content": "For instance, UNIX treats files simply as streams of bytes, where each byte is addressable by its offset from the beginning of the file. This provides flexibility and simplicity, allowing any program to access any part of a file without needing to worry about record boundaries. The operating system handles packing and unpacking  of  bytes  into  physical  disk  blocks  behind  the  scenes,  allowing developers to focus on the logical structure of their data rather than physical disk limitations.",
+      "metadata": {
+        "chunk_id": 10,
+        "source": "/tmp/tmpnun2_hhg.pptx",
+        "chunk_size": 500,
+        "start_index": 7416
+      }
+    }
+  ],
+  "cached_at": "2025-08-20T19:28:46.787411",
+  "document_count": 4
+}

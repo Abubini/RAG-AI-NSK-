@@ -87,31 +87,65 @@ class CacheManager:
         except Exception as e:
             print(f"❌ Cache write error: {e}")
     
-    def clear_expired_cache(self):
-        """Clear expired cache files"""
+    def clear_expired_cache(self) -> int:
+        """Clear expired cache files and return count cleared"""
         expired_files = []
-        for filename in os.listdir(self.cache_dir):
-            if filename.endswith('.json'):
-                cache_path = os.path.join(self.cache_dir, filename)
-                if not self._is_cache_valid(cache_path):
-                    expired_files.append(cache_path)
+        if os.path.exists(self.cache_dir):
+            for filename in os.listdir(self.cache_dir):
+                if filename.endswith('.json'):
+                    cache_path = os.path.join(self.cache_dir, filename)
+                    if not self._is_cache_valid(cache_path):
+                        expired_files.append(cache_path)
         
+        cleared_count = 0
         for file_path in expired_files:
             try:
                 os.remove(file_path)
-                print(f"🗑️  Cleared expired cache: {os.path.basename(file_path)}")
+                cleared_count += 1
             except Exception as e:
                 print(f"❌ Error clearing cache {file_path}: {e}")
         
-        return len(expired_files)
+        return cleared_count
     
     def clear_all_cache(self):
         """Clear all cache files"""
-        for filename in os.listdir(self.cache_dir):
-            if filename.endswith('.json'):
-                cache_path = os.path.join(self.cache_dir, filename)
-                try:
-                    os.remove(cache_path)
-                except:
-                    pass
-        print("🧹 Cleared all cache files")
+        if os.path.exists(self.cache_dir):
+            for filename in os.listdir(self.cache_dir):
+                if filename.endswith('.json'):
+                    cache_path = os.path.join(self.cache_dir, filename)
+                    try:
+                        os.remove(cache_path)
+                    except:
+                        pass
+    
+    def get_stats(self) -> Dict[str, Any]:
+        """Get cache statistics"""
+        stats = {
+            'total_files': 0,
+            'expired_files': 0,
+            'cache_dir': self.cache_dir,
+            'files': []
+        }
+        
+        if os.path.exists(self.cache_dir):
+            for filename in os.listdir(self.cache_dir):
+                if filename.endswith('.json'):
+                    cache_path = os.path.join(self.cache_dir, filename)
+                    stats['total_files'] += 1
+                    
+                    if not self._is_cache_valid(cache_path):
+                        stats['expired_files'] += 1
+                    
+                    # Get file info
+                    try:
+                        file_stats = os.stat(cache_path)
+                        stats['files'].append({
+                            'name': filename,
+                            'size': file_stats.st_size,
+                            'modified': datetime.fromtimestamp(file_stats.st_mtime),
+                            'is_valid': self._is_cache_valid(cache_path)
+                        })
+                    except:
+                        pass
+        
+        return stats
