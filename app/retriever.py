@@ -3,14 +3,16 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = ""  # Disable CUDA
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from langchain_community.vectorstores import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.retrievers import BM25Retriever
 from langchain_core.documents import Document
 from sentence_transformers import CrossEncoder
 from app.config import config
-from app.utils import save_documents_to_json, load_documents_from_json
+from app.utils import print_colored, save_documents_to_json, load_documents_from_json
+from app.filters import MetadataFilter
+from app.caching import CacheManager
 import torch
 import json
 
@@ -38,6 +40,12 @@ class HybridRetriever:
         
         # Load existing data
         self._load_existing_data()
+        
+        #metadata filter
+        self.metadata_filter = MetadataFilter()
+
+        #caching
+        self.cache_manager = CacheManager()
     
     def _load_existing_data(self):
         """Load existing vectorstore and BM25 documents"""
@@ -114,16 +122,30 @@ class HybridRetriever:
             print(f"❌ Error adding documents: {str(e)}")
             raise
     
-    def retrieve(self, query: str, top_k: Optional[int] = None) -> List[Document]:
-        """Perform hybrid retrieval with reranking"""
+    def retrieve(self, query: str, top_k: Optional[int] = None, 
+                filters: Optional[Dict[str, Any]] = None, 
+                use_cache: bool = True) -> List[Document]:
+        """Perform hybrid retrieval with optional metadata filtering"""
         if top_k is None:
             top_k = config.TOP_K
+
+
+        if use_cache:
+            cached_results = self.cache_manager.get_cached_results(query, filters)
+            if cached_results is not None:
+                return cached_results[:top_k]
         
         if self.vectorstore is None or self.bm25_retriever is None:
             print("⚠️  No documents indexed yet. Please ingest documents first.")
             return []
         
+        
         try:
+            # Apply metadata filtering if specified
+            all_docs = self.all_documents
+            if filters:
+                all_docs = self.metadata_filter.filter_documents(all_docs, filters)
+                print(f"   🔍 Applied filters: {filters}, {len(all_docs)} documents remain")
             print(f"🔍 Retrieving documents (top_k={top_k})...")
             
             # Semantic search
@@ -151,8 +173,11 @@ class HybridRetriever:
                 print("   📊 Reranking documents...")
                 reranked_docs = self._rerank(query, unique_docs, top_k)
                 print(f"   ✅ Reranking complete. Returning top {len(reranked_docs)} documents")
+                # Cache the results
+                if use_cache and reranked_docs:
+                    self.cache_manager.cache_results(query, reranked_docs, filters)
                 return reranked_docs
-            else:
+            else:   
                 return []
             
         except Exception as e:
@@ -191,23 +216,37 @@ class HybridRetriever:
         }
     
     def clear_all_data(self):
-        """Clear all stored data (for testing)"""
+        """Clear all stored data and reset in-memory state"""
         import shutil
         try:
-            # Clear vectorstore
+            # Clear vectorstore directory
             if os.path.exists(config.PERSIST_DIR):
                 shutil.rmtree(config.PERSIST_DIR)
+                print("🗑️  Cleared vectorstore data")
             
-            # Clear BM25 storage
-            if os.path.exists(config.BM25_STORAGE_PATH):
-                os.remove(config.BM25_STORAGE_PATH)
+            # Clear BM25 storage file
+            bm25_dir = os.path.dirname(config.BM25_STORAGE_PATH)
+            if os.path.exists(bm25_dir):
+                shutil.rmtree(bm25_dir)
+                print("🗑️  Cleared BM25 storage data")
             
-            # Reset state
+            # Clear cache directory
+            if os.path.exists(config.CACHE_DIR):
+                shutil.rmtree(config.CACHE_DIR)
+                print("🗑️  Cleared cache data")
+            
+            # Reset in-memory state
             self.all_documents = []
             self.vectorstore = None
             self.bm25_retriever = None
             
-            print("🧹 Cleared all stored data")
+            # Recreate necessary directories
+            os.makedirs(config.PERSIST_DIR, exist_ok=True)
+            os.makedirs(os.path.dirname(config.BM25_STORAGE_PATH), exist_ok=True)
+            os.makedirs(config.CACHE_DIR, exist_ok=True)
+            
+            print_colored("✅ All data cleared successfully!", "green")
             
         except Exception as e:
-            print(f"❌ Error clearing data: {e}")
+            print_colored(f"❌ Error clearing data: {e}", "red")
+            raise

@@ -23,4 +23,8 @@ class Config:
     CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "800"))
     CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", "100"))
 
+    CACHE_DIR: str = os.getenv("CACHE_DIR", "./data/cache")
+    CACHE_TTL_HOURS: int = int(os.getenv("CACHE_TTL_HOURS", "24"))
+    EVAL_DATA_PATH: str = os.getenv("EVAL_DATA_PATH", "./data/evaluation/qa_pairs.jsonl")
+
 config = Config()

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import json
 import os
 import sys
 
@@ -13,12 +14,16 @@ from app.generator import AnswerGenerator
 from app.context import format_context, get_citations
 from app.utils import ensure_directories, print_colored
 from app.config import config
+from app.evaluation import RAGEvaluator
+from app.caching import CacheManager
 
 class RAGCLI:
     def __init__(self):
         ensure_directories()
         self.retriever = HybridRetriever()
         self.generator = AnswerGenerator()
+        self.evaluator = RAGEvaluator()
+        self.cache_manager = CacheManager()
     
     def ingest(self, file_path: str = None, directory: str = None):
         """Ingest documents into the system"""
@@ -51,10 +56,22 @@ class RAGCLI:
             import traceback
             traceback.print_exc()
     
-    def query(self, question: str, show_context: bool = False):
-        """Query the RAG system"""
+    def query(self, question: str, show_context: bool = False, 
+            filters_str: str = None, use_cache: bool = True):
+        """Query the RAG system with optional filters"""
         try:
             print_colored(f"\n🔍 Searching for: {question}", "blue")
+            
+            # Parse filters if provided
+            filters = None
+            if filters_str:
+                try:
+                    import json
+                    filters = json.loads(filters_str)
+                    print_colored(f"   🎯 Applying filters: {filters}", "yellow")
+                except json.JSONDecodeError as e:
+                    print_colored(f"❌ Invalid JSON filters: {e}", "red")
+                    return
             
             # Check if retriever is ready
             stats = self.retriever.get_stats()
@@ -62,8 +79,8 @@ class RAGCLI:
                 print_colored("❌ No documents indexed yet. Please run 'ingest' first.", "red")
                 return
             
-            # Retrieve relevant documents
-            docs = self.retriever.retrieve(question)
+            # Retrieve relevant documents with filters
+            docs = self.retriever.retrieve(question, filters=filters, use_cache=use_cache)
             
             if show_context:
                 print_colored("\n📄 Retrieved Context:", "yellow")
@@ -101,8 +118,13 @@ class RAGCLI:
         """Clear all stored data"""
         confirm = input("❓ Are you sure you want to clear ALL data? This cannot be undone. (y/N): ")
         if confirm.lower() == 'y':
-            self.retriever.clear_all_data()
-            print_colored("✅ All data cleared!", "green")
+            try:
+                self.retriever.clear_all_data()
+                # Create a fresh retriever instance to ensure clean state
+                self.retriever = HybridRetriever()
+                print_colored("✅ All data cleared and system reset!", "green")
+            except Exception as e:
+                print_colored(f"❌ Error during clear: {str(e)}", "red")
         else:
             print_colored("❌ Clear operation cancelled", "yellow")
     
@@ -137,6 +159,54 @@ class RAGCLI:
                 break
             except Exception as e:
                 print_colored(f"❌ Error: {str(e)}", "red")
+    def evaluate(self, num_samples: int = 5):
+        """Run comprehensive evaluation"""
+        try:
+            results = self.evaluator.run_comprehensive_evaluation(
+                self.retriever, self.generator, num_samples
+            )
+            
+            print_colored("\n📊 Evaluation Results:", "blue")
+            print(json.dumps(results, indent=2))
+            
+        except Exception as e:
+            print_colored(f"❌ Evaluation error: {str(e)}", "red")
+    
+    def add_eval_pair(self, question: str, expected_docs: str, reference_answer: str = ""):
+        """Add evaluation QA pair"""
+        try:
+            # Parse expected document IDs (comma-separated)
+            expected_doc_ids = [doc_id.strip() for doc_id in expected_docs.split(',')]
+            
+            self.evaluator.add_evaluation_pair(question, expected_doc_ids, reference_answer)
+            print_colored("✅ Evaluation pair added successfully!", "green")
+            
+        except Exception as e:
+            print_colored(f"❌ Error adding evaluation pair: {str(e)}", "red")
+    
+    def clear_cache(self, expired_only: bool = False):
+        """Clear cache files"""
+        try:
+            if expired_only:
+                cleared_count = self.cache_manager.clear_expired_cache()
+                print_colored(f"✅ Cleared {cleared_count} expired cache files", "green")
+            else:
+                self.cache_manager.clear_all_cache()
+                print_colored("✅ Cleared all cache files", "green")
+                
+        except Exception as e:
+            print_colored(f"❌ Error clearing cache: {str(e)}", "red")
+    
+    def cache_stats(self):
+        """Show cache statistics"""
+        cache_dir = self.cache_manager.cache_dir
+        if os.path.exists(cache_dir):
+            cache_files = [f for f in os.listdir(cache_dir) if f.endswith('.json')]
+            print_colored(f"\n📊 Cache Statistics:", "blue")
+            print(f"   Total cache files: {len(cache_files)}")
+            print(f"   Cache directory: {cache_dir}")
+        else:
+            print_colored("❌ Cache directory not found", "red")
 
 def main():
     parser = argparse.ArgumentParser(description="RAG CLI System")
@@ -152,6 +222,8 @@ def main():
     query_parser = subparsers.add_parser('query', help='Query the system')
     query_parser.add_argument('question', help='Question to ask')
     query_parser.add_argument('--context', action='store_true', help='Show retrieved context')
+    query_parser.add_argument('--filters', type=str, help='JSON string of filters to apply')
+    query_parser.add_argument('--no-cache', action='store_true', help='Disable caching')
 
     # Add to main() function after other subparsers
     clear_parser = subparsers.add_parser('clear', help='Clear all stored data')
@@ -161,6 +233,21 @@ def main():
     
     # Interactive command
     subparsers.add_parser('chat', help='Start interactive chat mode')
+
+    # Evaluation commands
+    eval_parser = subparsers.add_parser('evaluate', help='Run system evaluation')
+    eval_parser.add_argument('--samples', type=int, default=5, help='Number of samples to evaluate')
+
+    add_eval_parser = subparsers.add_parser('add-eval', help='Add evaluation QA pair')
+    add_eval_parser.add_argument('--question', required=True, help='Evaluation question')
+    add_eval_parser.add_argument('--expected-docs', required=True, help='Comma-separated expected document IDs')
+    add_eval_parser.add_argument('--reference-answer', help='Reference answer (optional)')
+
+    # Cache commands
+    cache_parser = subparsers.add_parser('cache', help='Cache management')
+    cache_parser.add_argument('--clear-expired', action='store_true', help='Clear only expired cache')
+    cache_parser.add_argument('--clear-all', action='store_true', help='Clear all cache')
+    cache_parser.add_argument('--stats', action='store_true', help='Show cache statistics')
     
     args = parser.parse_args()
     rag = RAGCLI()
@@ -168,11 +255,26 @@ def main():
     if args.command == 'ingest':
         rag.ingest(args.file, args.directory)
     elif args.command == 'query':
-        rag.query(args.question, args.context)
+        rag.query(args.question, args.context, args.filters, not args.no_cache)
     elif args.command == 'status':
         rag.status()
     elif args.command == 'chat':
         rag.interactive_mode()
+    elif args.command == 'evaluate':
+        rag.evaluate(args.samples)
+    elif args.command == 'add-eval':
+        rag.add_eval_pair(args.question, args.expected_docs, args.reference_answer)
+    elif args.command == 'clear':
+        rag.clear()
+    elif args.command == 'cache':
+        if args.clear_expired:
+            rag.clear_cache(expired_only=True)
+        elif args.clear_all:
+            rag.clear_cache(expired_only=False)
+        elif args.stats:
+            rag.cache_stats()
+        else:
+            cache_parser.print_help()
     else:
         parser.print_help()
 
