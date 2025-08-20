@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+import sys
+
+# Patch SQLite for ChromaDB (fixes sqlite3 < 3.35 issue on Streamlit Cloud)
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 import streamlit as st
 import json
 import os
