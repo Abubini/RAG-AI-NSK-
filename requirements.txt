@@ -1,0 +1,32 @@
+# UI
+streamlit
+
+# Core LangChain + Providers
+langchain
+langchain_groq
+langchain_google_genai
+langchain_community
+langchain-huggingface
+langchain-chroma
+langchain-text-splitters
+
+# Document parsing
+pypdf
+unstructured
+markdownify
+
+# Embeddings & Models
+sentence_transformers
+transformers
+
+# Retrieval
+chromadb
+rank_bm25
+
+# API & Config
+fastapi
+uvicorn
+python-dotenv
+
+# Evaluation (optional for later, but good to have)
+ragas
