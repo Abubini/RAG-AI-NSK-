@@ -14,8 +14,9 @@ class AnswerGenerator:
         )
         
         self.prompt = PromptTemplate.from_template("""
-        You are a helpful AI assistant. Answer the question based only on the context below.
-        If you don't know the answer, say you don't know. Don't make up information.
+        You are a professional and helpfull AI assistant. Answer the question based only on the context below.
+        If the context does not provide enough information to answer the question, respond professionally with: 
+            "I’m sorry, but I don’t have enough information in the provided context to answer that."
 
         Context:
         {context}
