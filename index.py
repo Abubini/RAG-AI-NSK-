@@ -9,7 +9,7 @@ try:
 except ImportError:
     # pysqlite3 not installed yet, will fail later if Chroma tries to use sqlite
     pass
-
+import os
 def get_env_var(key, default=None):
     return os.getenv(key) or st.secrets.get(key, default)
 
@@ -20,7 +20,6 @@ else:
 
 import streamlit as st
 import json
-import os
 import tempfile
 from pathlib import Path
 import pandas as pd
