@@ -10,6 +10,14 @@ except ImportError:
     # pysqlite3 not installed yet, will fail later if Chroma tries to use sqlite
     pass
 
+def get_env_var(key, default=None):
+    return os.getenv(key) or st.secrets.get(key, default)
+
+if "STREAMLIT_SERVER" in os.environ:
+    PERSIST_DIR = "/tmp/chroma_data"
+else:
+    PERSIST_DIR = get_env_var("PERSIST_DIR", "./data/chroma")
+
 import streamlit as st
 import json
 import os
