@@ -1,0 +1,738 @@
+[
+  {
+    "page_content": "3 | P a g e \n \nFile system \nFile concept  \n computers use various types of non-volatile storage devices (like HDDs, SSDs, \ntapes, etc.) to store data, and the operating system provides a consistent, logical \nview of this storage by using files. A file is a named collection of related \ninformation and is the smallest unit in which data can be stored on secondary \nstorage. Files can contain different types of data  such as text, programs, images, \nor system information  and their structure depends on the type of content. The \noperating system abstracts physical storage through the use of files, making data \nstorage and retrieval more manageable for users and applications \n \nFile attribute \nA file is identified by a human -readable name, making it easy for users to \nreference, regardless of who created or uses it. Once created, a file becomes \nindependent of its origin and can be copied or shared across systems while",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 0,
+      "page_label": "1",
+      "start_index": 0,
+      "chunk_id": 0,
+      "chunk_size": 927
+    }
+  },
+  {
+    "page_content": "reference, regardless of who created or uses it. Once created, a file becomes \nindependent of its origin and can be copied or shared across systems while \nretaining its name. Additionally, files have various attributes such as name, type, \nlocation, size, access permissions, timestamps, and unique identifiers that help the \noperating system manage, protect, and track the file. Some modern file systems \nalso include extended attributes like character encoding and security features. \n \n✓ Name The symbolic file name is the only information kept in human \nreadable form. \n✓ Identifie This unique tag, usually a number, identifies the file within the file \nsystem it is the non-human-readable name for the file.   \n✓ Type This information is needed for systems that support different types of \nfiles.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 0,
+      "page_label": "1",
+      "start_index": 774,
+      "chunk_id": 1,
+      "chunk_size": 801
+    }
+  },
+  {
+    "page_content": "4 | P a g e \n \n✓ Location This information is a pointer to a device and to the location of the \nfile on that device \n✓ Size The current size of the file (in bytes, words, or blocks) and possibly the \nmaximum allowed size are included in this attribute.  \n✓ Protection Access-control information determines who can do reading, \nwriting, executing, and so on.   \n✓ Timestamps and user identificatio n This information may be kept for \ncreation, last modification, and last use. These data can be useful for \nprotection, security, and usage monitoring.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 1,
+      "page_label": "2",
+      "start_index": 0,
+      "chunk_id": 2,
+      "chunk_size": 549
+    }
+  },
+  {
+    "page_content": "5 | P a g e \n \nFile operation \n A file is an  abstract data type. To define a file properly, we need to \nconsider the operations that can be performed on files. The operating \nsystem can provide system calls to create, write, read, reposition, delete and \ntruncate files. \n \n▪ Creating a file Two steps are necessary to create a file. First, space in \nthe file system must be found for the file. Second, an entry for the new \nfile must be made in the directory. \n▪ Writing a file To write a file, we make a system call specifying both the \nname of the file and the information to be written to the file. Given \nthe name of the file the system searches the directory to find the file’s \nlocation. The system must keep a write pointer to the location in the \nfile where the next write is to take place. The write pointer must be \nupdated whenever a write occurs. \n▪ Reading a file To read from a file, we use a system call that specifies",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 2,
+      "page_label": "3",
+      "start_index": 0,
+      "chunk_id": 3,
+      "chunk_size": 935
+    }
+  },
+  {
+    "page_content": "file where the next write is to take place. The write pointer must be \nupdated whenever a write occurs. \n▪ Reading a file To read from a file, we use a system call that specifies \nthe name of the file and where (in memory) the next block of the file \nshould be put. Again, the directory is searched for the associated \nentry, and the system needs to keep a read pointer to the loc ation in \nthe file where the next read is to take place. Once the read has taken \nplace, the read pointer is updated. Because a process is usually either \nreading from or writing to a file, the current operation location can be \nkept as a per-process current f ile-position pointer. Both the read and \nwrite operations use this same pointer, saving space and reducing \nsystem complexity. \n▪ Repositioning within a file  The directory is searched for the \nappropriate entry, and the current-file-position pointer is repositioned \nto a given value. Repositioning within a file need not involve any actual",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 2,
+      "page_label": "3",
+      "start_index": 757,
+      "chunk_id": 4,
+      "chunk_size": 983
+    }
+  },
+  {
+    "page_content": "appropriate entry, and the current-file-position pointer is repositioned \nto a given value. Repositioning within a file need not involve any actual \nI/O. This file operation is also known as a file seek.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 2,
+      "page_label": "3",
+      "start_index": 1593,
+      "chunk_id": 5,
+      "chunk_size": 203
+    }
+  },
+  {
+    "page_content": "6 | P a g e \n \n▪ Deleting a file To delete a file, we search the directory for the named \nfile. Having found the associated directory entry, we release all file \nspace, so that it can be reused by other files, and erase the directory \nentry \n \n▪ Truncating a file The user may want to erase the contents of a file but \nkeep its attributes. Rather than forcing the user to delete the file and \nthen re  create it, this function allows all  attributes to remain \nunchanged—except for file length—but lets the file be reset to length \nzero and its file space released. \n \n▪ File pointer On systems that do not include a file offset as part of the \nread() and write() system calls, the system must track the last read \nwrite location as a current-file-position pointer. This pointer is unique \nto each  process operating on the file and therefore must be kept \nseparate from the on-disk file attributes. \n \n▪ File-open count As files are closed, the operating system must reuse",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 3,
+      "page_label": "4",
+      "start_index": 0,
+      "chunk_id": 6,
+      "chunk_size": 973
+    }
+  },
+  {
+    "page_content": "to each  process operating on the file and therefore must be kept \nseparate from the on-disk file attributes. \n \n▪ File-open count As files are closed, the operating system must reuse \nits open -file table entries, or it could run out of space in the table. \nMultiple processes may have opened a file, and the system must wait \nfor the last file to close before removing the open-file table entry. The \nfile-open count tracks the number of opens and closes and reaches \nzero on the last close. The system can then remove the entry. \n▪ Disk location of the file Most file operations require the system to \nmodify data within the file. The information needed to locate the file \non disk is kept in memory so that the system does not have to read it \nfrom disk for each operation. \n▪ Access rights Each process opens a file in an access mode. This \ninformation is stored on the per  process table so the operating system \ncan allow or deny subsequent I/O requests.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 3,
+      "page_label": "4",
+      "start_index": 790,
+      "chunk_id": 7,
+      "chunk_size": 961
+    }
+  },
+  {
+    "page_content": "7 | P a g e \n \nFile types  \nthe importance of file types  in operating systems and how they help the \nsystem and applications interact appropriately with files. A common way to \nindicate a file's type is by using a file extension  (e.g., .docx, .exe, .java). These \nextensions help identify what kind of file it is and what operations can be \nperformed on it. While some operating systems rely on extensions to recognize \nfile types, others treat them as hints for applications. Recognizing file types helps \nprevent errors, such as trying to read binary files as text, and allows programs to \nfind and work with the files they expect. \n \nFile structure \nfile types can define a file's internal structure , which is necessary for the \noperating system and applications to properly read and use the file. While \nsupporting multiple file structures can make the OS more functional, it also \nincreases complexity and size. To avoid this, many systems (like UNIX and",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 4,
+      "page_label": "5",
+      "start_index": 0,
+      "chunk_id": 8,
+      "chunk_size": 962
+    }
+  },
+  {
+    "page_content": "supporting multiple file structures can make the OS more functional, it also \nincreases complexity and size. To avoid this, many systems (like UNIX and \nWindows) keep file structures minimal and treat files simply as byte sequences, \nleaving structure interpretation to applications. However, the OS must still \nrecognize certain essential file types, like executables, to function properly.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 4,
+      "page_label": "5",
+      "start_index": 811,
+      "chunk_id": 9,
+      "chunk_size": 391
+    }
+  },
+  {
+    "page_content": "8 | P a g e \n \nInternal file structure \nManaging file data on disk involves dealing with differences between logical \ndata organization  and the physical storage structure  of disks. Disks perform \ninput/output operations in fixed-size units called blocks, which are determined by \nthe hardware’s sector size (e.g., 512 bytes per block). However, the logical records \nthat applications or users work with —such as lines of text or individual bytes —\noften do not align perfectly with these fixed block sizes. As a result, the operating \nsystem or application mus t pack multiple logical records into physical blocks  to \nmake efficient use of disk space and ensure correct data access. \nFor instance, UNIX treats files simply as streams of bytes, where each byte is \naddressable by its offset from the beginning of the file. This provides flexibility and \nsimplicity, allowing any program to access any part of a file without needing to",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 5,
+      "page_label": "6",
+      "start_index": 0,
+      "chunk_id": 10,
+      "chunk_size": 936
+    }
+  },
+  {
+    "page_content": "addressable by its offset from the beginning of the file. This provides flexibility and \nsimplicity, allowing any program to access any part of a file without needing to \nworry ab out record boundaries. The operating system handles packing and \nunpacking of bytes into physical disk blocks behind the scenes, allowing \ndevelopers to focus on the logical structure of their data rather than physical disk \nlimitations. \nHowever, this method introduces internal fragmentation , where the last \nblock of a file may not be fully used. Since disk space is always allocated in whole \nblocks, any unused portion of the last block represents wasted space. For example, \nif a file is 1,949 bytes and the block size is 512 bytes, the system will allocate 2,048 \nbytes (four full blocks), leaving 99 bytes unused. This waste increases as block sizes \ngrow, creating a trade -off between larger block sizes (which may improve \nperformance) and efficiency of space usage.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 5,
+      "page_label": "6",
+      "start_index": 767,
+      "chunk_id": 11,
+      "chunk_size": 958
+    }
+  },
+  {
+    "page_content": "grow, creating a trade -off between larger block sizes (which may improve \nperformance) and efficiency of space usage. \nthe operating system must bridge the gap between how data is logically \norganized and how it is physically stored. It does so by translating logical records \ninto physical blocks and managing the resulting overhead, such as internal \nfragmentation. While this  introduces some inefficiency, especially with larger \nblock sizes, it is a necessary part of making file systems practical and efficient for \na wide variety of applications and data types.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 5,
+      "page_label": "6",
+      "start_index": 1607,
+      "chunk_id": 12,
+      "chunk_size": 569
+    }
+  },
+  {
+    "page_content": "9 | P a g e \n \nAccess methods \nSequential access \n The simplest access method is sequential access. Information in the file is \nprocessed in order, one record after the other. This mode of access is by far the \nmost common; for example, editors and compilers usually access files in this \nfashion. \n Reads and writes make up the bulk of the operations on a file. A read \noperation—read next()  reads the next portion of the file and automatically \nadvances a file pointer, which tracks the I/O location. Similarly, the write operation \nwrite next() appends to the end of the file and advances to the end of the newly \nwritten material (the new end of file). Such a file can be reset to the beginning, \nand on  some systems a program may be able to skip forward or backward n \nrecords for some integer n perhaps only for n = 1. Sequential access,  \n \n \nSequential access file \nwhich is depicted in the Figure above is based on a tape model of a file and",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 6,
+      "page_label": "7",
+      "start_index": 0,
+      "chunk_id": 13,
+      "chunk_size": 952
+    }
+  },
+  {
+    "page_content": "records for some integer n perhaps only for n = 1. Sequential access,  \n \n \nSequential access file \nwhich is depicted in the Figure above is based on a tape model of a file and \nworks as well on sequential-access devices as it does on random-access ones.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 6,
+      "page_label": "7",
+      "start_index": 776,
+      "chunk_id": 14,
+      "chunk_size": 254
+    }
+  },
+  {
+    "page_content": "10 | P a g e \n \nDirect access \nthe direct-access (or relative access) method  for file systems, which allows \nprograms to read or write fixed -length records in any order, unlike sequential \naccess which processes data in a specific sequence. Direct access is especially \nuseful for applications like databases or reservation systems, where fast, random \naccess to specific records is essential. With this method, file operations are based \non block numbers that reference the position of data relative to the file’s start, \nrather than its physical location on disk. This abstraction gives the operating \nsystem flexibility in file placement and helps manage security. \nSome systems support only sequential or direct access, while others require \ndeclaring the access type when a file is created. Although sequential access can \nbe simulated on direct-access files easily, the reverse is inefficient. Overall, direct \naccess enhances performance for data -heavy applications that need quick,",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 7,
+      "page_label": "8",
+      "start_index": 0,
+      "chunk_id": 15,
+      "chunk_size": 992
+    }
+  },
+  {
+    "page_content": "be simulated on direct-access files easily, the reverse is inefficient. Overall, direct \naccess enhances performance for data -heavy applications that need quick, \ntargeted retrieval of information.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 7,
+      "page_label": "8",
+      "start_index": 830,
+      "chunk_id": 16,
+      "chunk_size": 198
+    }
+  },
+  {
+    "page_content": "11 | P a g e \n \nDirectory structure \n The directory can be viewed as a symbol table that translates file names into \ntheir file control blocks. If we take such a view, we see that the directory itself can \nbe organized in many ways. The organization must allow us to insert entries, to \ndelete entries, to search for a named entry, and t o list all the entries in the \ndirectory. When considering a particular directory structure we need to keep in \nmind the operations that are to be performed on a directory: \n• Search for a file We need to be able to search a directory structure to find  \nthe entry for a particular file. Since files have symbolic  names and similar \nnames may indicate a relationship among files, we may want to be able to \nfind all files whose names match a particular pattern. \n• Create a file New files need to be created and added to the directory. \n• Delete a file When a file is no longer needed we want to be able to remove",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 8,
+      "page_label": "9",
+      "start_index": 0,
+      "chunk_id": 17,
+      "chunk_size": 952
+    }
+  },
+  {
+    "page_content": "• Create a file New files need to be created and added to the directory. \n• Delete a file When a file is no longer needed we want to be able to remove \nit from the directory. Note a delete leaves a hole in the directory structure \nand the file system may have a method to defragement  the directory \nstructure.  \n•  List a directory  We need to be able to list the files in a directory and the \ncontents of the directory entry for each file in the list. \n• Rename a file Because the name of a file represents its contents to its users, \nwe must be able to change the name when the contents or use of the file \nchanges. Renaming a file may also allow its position within the directory \nstructure to be changed.  \n• Traverse the file system We may wish to access every directory and every \nfile within a directory structure. For reliability, it is a good idea to save the \ncontents and structure of the entire file system at regular intervals. Often,",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 8,
+      "page_label": "9",
+      "start_index": 802,
+      "chunk_id": 18,
+      "chunk_size": 948
+    }
+  },
+  {
+    "page_content": "file within a directory structure. For reliability, it is a good idea to save the \ncontents and structure of the entire file system at regular intervals. Often, \nwe do this by copying all files to magnetic tape other secondary storage or \nacross a network to another system or the cloud. This technique provides a \nbackup copy in case of system failure. In addition, if a file is no longer in use \nthe file can be copied the backup target and the disk space of that file \nreleased for reuse by another file.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 8,
+      "page_label": "9",
+      "start_index": 1590,
+      "chunk_id": 19,
+      "chunk_size": 507
+    }
+  },
+  {
+    "page_content": "12 | P a g e \n \nSingle level directory \n The simplest directory structure is the single -level directory. All files are \ncontained in the same directory, which is easy to support and understand A single-\nlevel directory has significant limitations, however, when the number of files \nincreases or when the system has more than one user. Since all fi les are in the \nsame directory, they must have unique names. If two users call their data file \ntest.txt, then the unique-name rule is violated \n \nSingle level directory \n \nTwo level directory \n As we have seen a single level directory often leads to confusion of file names \namong different users. But In a two-level directory structure  each user has a \nseparate User File Directory (UFD), and all UFDs are listed in a Master File Directory \n(MFD). This structure helps prevent filename conflicts between users but limits \ncollaboration, as it isolates user files. To allow access to another user's file, a user",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 9,
+      "page_label": "10",
+      "start_index": 0,
+      "chunk_id": 20,
+      "chunk_size": 963
+    }
+  },
+  {
+    "page_content": "(MFD). This structure helps prevent filename conflicts between users but limits \ncollaboration, as it isolates user files. To allow access to another user's file, a user \nmust know the full path name  (e.g., /user b/test.txt), combining both the \nusername and filename. \nDifferent operating systems use different file naming conventions. For \nexample, Windows uses volume letters (C:\\user b\\test.txt), while UNIX/Linux uses \nhierarchical paths ( /u/pgalvin/test). Some systems (like OpenVMS) include \nvolume, directory, and version information in file names.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 9,
+      "page_label": "10",
+      "start_index": 794,
+      "chunk_id": 21,
+      "chunk_size": 558
+    }
+  },
+  {
+    "page_content": "13 | P a g e \n \nFor system files (e.g., loaders or compilers), storing copies in every UFD is \ninefficient. Instead, a special directory stores these files, and the OS searches user \ndirectories first, then this system directory, based on a search path. The search \npath can be customized, allowing flexible file and command location resolution, \ncommonly seen in UNIX and Windows systems. \n \n        Two level directory structure \nTree structured directories \nA tree-structured directory extends the two-level directory into a hierarchy \nof arbitrary depth, allowing users to create subdirectories to organize files \nlogically. The structure starts with a root directory, and each file has a unique path \nname—either absolute (starting from root) or relative (from the current \ndirectory). \nEach process typically has a current directory, set at login and inherited by \nsubprocesses. Users can change this directory to access different files more easily.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 10,
+      "page_label": "11",
+      "start_index": 0,
+      "chunk_id": 22,
+      "chunk_size": 955
+    }
+  },
+  {
+    "page_content": "directory). \nEach process typically has a current directory, set at login and inherited by \nsubprocesses. Users can change this directory to access different files more easily. \nDirectories are special files with entries marked as either files or \nsubdirectories, managed using system calls. This model provides flexibility, \nallowing logical grouping of files (e.g., separating source code and binaries). \nDeleting directories can follow two policies:",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 10,
+      "page_label": "11",
+      "start_index": 779,
+      "chunk_id": 23,
+      "chunk_size": 452
+    }
+  },
+  {
+    "page_content": "14 | P a g e \n \n• Only allow deletion if empty, requiring manual file removal. \n• Recursive deletion, as in UNIX's rm -r, which removes all contents but risks \naccidental data loss. \nUsers can access other users' files by specifying full path names, supporting both \nfile organization and file sharing. \n  \nAcyclic graph directories \n An acyclic graph directory structure is an extension of the tree structure that \nallows file and directory sharing  across multiple locations in the file system \nwithout duplication. \n1. Purpose: Enables multiple users or directories to share the same file or \nsubdirectory, avoiding unnecessary duplication and ensuring changes are \nreflected everywhere. \n2. Structure: \no A tree prohibits sharing. \no An acyclic graph  (no cycles) allows files/subdirectories to exist in \nmultiple directories.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 11,
+      "page_label": "12",
+      "start_index": 0,
+      "chunk_id": 24,
+      "chunk_size": 830
+    }
+  },
+  {
+    "page_content": "15 | P a g e \n \n3. Implementation Methods: \no Links (symbolic or hard) point to the actual file or directory. \n▪ Symbolic links (soft): Store the path to the original file; may break \nif the target is deleted. \n▪ Hard links: Share the same inode and use a reference count to \nmanage deletion. \no Duplicate entries (not recommended): Cause consistency issues when \na file is modified. \n4. Challenges: \no Multiple path names to the same file (aliasing problem). \no Traversal issues during backups or system scans. \no Deletion complications: \n▪ If one user deletes a file, others may be left with dangling \npointers. \n▪ Reference counting is used (as in UNIX) to delete a file only when \nall references are removed. \n5. Design Considerations: \no Some systems (for simplicity and safety) do not allow shared \ndirectories or links. \no Proper management of links and deletion policies is crucial to maintain \nfile system integrity.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 12,
+      "page_label": "13",
+      "start_index": 0,
+      "chunk_id": 25,
+      "chunk_size": 925
+    }
+  },
+  {
+    "page_content": "o Some systems (for simplicity and safety) do not allow shared \ndirectories or links. \no Proper management of links and deletion policies is crucial to maintain \nfile system integrity. \nAn acyclic graph directory offers flexibility for sharing but adds complexity in \nmanaging references, updates, and deletions. Systems like UNIX manage this using \nreference counts and links while avoiding cycles to maintain structure.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 12,
+      "page_label": "13",
+      "start_index": 741,
+      "chunk_id": 26,
+      "chunk_size": 421
+    }
+  },
+  {
+    "page_content": "16 | P a g e \n \n \nAcyclic-graph directory structure \n \nGeneral graph directory \nAn acyclic graph directory structure  is designed to allow file and directory \nsharing while avoiding cycles to maintain simplicity and performance. However, \nintroducing links can unintentionally create cycles, which cause serious issues. \n1. Acyclic vs. Cyclic Structure: \no A tree structure is naturally acyclic. \no Adding links can turn it into a graph, and if not managed carefully, \ncycles can form. \n2. Problems Caused by Cycles: \no Infinite loops during file searches or traversal due to re -entering the \nsame directories. \no Incorrect deletion handling because files in a cycle might still show non-\nzero reference counts even if they're no longer accessible.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 13,
+      "page_label": "14",
+      "start_index": 0,
+      "chunk_id": 27,
+      "chunk_size": 749
+    }
+  },
+  {
+    "page_content": "17 | P a g e \n \n3. Garbage Collection Requirement: \no If cycles exist, reference counts alone are unreliable. \no Garbage collection (mark-and-sweep) is needed to identify and delete \nunreachable files. \no However, garbage collection is slow and rarely used  in disk -based \nsystems. \n4. Cycle Prevention Strategies: \no Use cycle detection algorithms (costly in disk-based graphs). \no A practical approach is to ignore links during traversal , which avoids \ncycles and overhead. \nTo keep directory management efficient and safe, acyclic structures are \npreferred. Allowing cycles introduces complexity, risks infinite loops, and \nnecessitates expensive garbage collection. Thus, systems must carefully prevent \ncycles when implementing file sharing via links. \n \nGeneral graph directory",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 14,
+      "page_label": "15",
+      "start_index": 0,
+      "chunk_id": 28,
+      "chunk_size": 785
+    }
+  },
+  {
+    "page_content": "18 | P a g e \n \nProtection \n When information is stored in a computer system, we want to keep it safe \nfrom physical damage (the issue of reliability) and improper access (the issue of \nprotection). Reliability is generally provided  by duplicate copies of \nfiles.Manycomput ers have systems programs that automatically (or through \ncomputer-operator intervention) copy disk files to tape at regular intervals (once \nper day or week or month) to maintain a copy should a file system be accidentally \ndestroyed. File systems can be damaged by hardware problems (such as errors in \nreading or writing), power surgesor failures, head crashes, dirt, temperature \nextremes, and vandalism. Files may be deleted accidentally. Bugs in the file-system \nsoft ware can also cause file contents to be lost.  \nProtection can be provided in many ways. For a laptop system running a \nmodern operating system, we might provide protection by requiring a user",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 15,
+      "page_label": "16",
+      "start_index": 0,
+      "chunk_id": 29,
+      "chunk_size": 941
+    }
+  },
+  {
+    "page_content": "soft ware can also cause file contents to be lost.  \nProtection can be provided in many ways. For a laptop system running a \nmodern operating system, we might provide protection by requiring a user \nnameandpasswordauthentication to access it, encrypting the secondary stor age \nso even someone opening the laptop and removing the drive would have a difficult \ntime accessing its data, and firewalling network access so that when it is in use it \nis difficult to break in via its network connection. In multiuser system, even valid \naccess of the system needs more advanced mechanisms to allow only valid access \nof the data. \n \nTypes of access \n The need to protect files is a direct result of the ability to access files. Systems \nthat do not permit access to the files of other users do not need protection. Thus, \nwecould providecomplete protection by prohibiting access. Alternatively, we \ncould provide free access with no protection. Both approaches are too extreme",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 15,
+      "page_label": "16",
+      "start_index": 744,
+      "chunk_id": 30,
+      "chunk_size": 971
+    }
+  },
+  {
+    "page_content": "wecould providecomplete protection by prohibiting access. Alternatively, we \ncould provide free access with no protection. Both approaches are too extreme \nfor general use. What is needed is controlled access. Protection mechanisms \nprovide controlled access by limiting the types of f ile access that can be made. \nAccess is permitted or denied depending on several factors, one of which is the \ntype of access requested. Several different types of operations may be controlled:",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 15,
+      "page_label": "16",
+      "start_index": 1561,
+      "chunk_id": 31,
+      "chunk_size": 479
+    }
+  },
+  {
+    "page_content": "19 | P a g e \n \n➢ Read Read from the file. \n➢ Write Write or rewrite the file.  \n➢ Execute Load the file into memory and execute it.  \n➢ Append Write newinformation at the end of the file.  \n➢ Delete Delete the file and free its space for possible reuse.  \n➢ List List the name and attributes of the file. \n➢ Attribute change Changing the attributes of the file. \n \nAccess control \nThe main idea is that file and directory access in operating systems is \ncontrolled based on user identity, using Access Control Lists (ACLs) and simplified \nuser classifications (Owner, Group, Other) to manage permissions efficiently. \n1. Access Control Lists (ACLs): \no Each file/directory can have an ACL specifying which users have which \ntypes of access (read, write, execute). \no Offers fine-grained control but can be long and hard to manage. \n2. Simplified Access Scheme: \no Most systems simplify by using three user classes: \n▪ Owner: The file creator. \n▪ Group: A set of users with shared access.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 16,
+      "page_label": "17",
+      "start_index": 0,
+      "chunk_id": 32,
+      "chunk_size": 988
+    }
+  },
+  {
+    "page_content": "2. Simplified Access Scheme: \no Most systems simplify by using three user classes: \n▪ Owner: The file creator. \n▪ Group: A set of users with shared access. \n▪ Other: All remaining users. \no Each class has read (r), write (w), and execute (x) permissions. \n3. Combining ACLs with User Classes: \no Modern systems like UNIX and Solaris  use the owner/group/other \nmodel by default, with ACLs added only when finer control is needed. \no Example: A project team can be a group, while temporary access for an \noutsider can be managed via ACLs.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 16,
+      "page_label": "17",
+      "start_index": 833,
+      "chunk_id": 33,
+      "chunk_size": 537
+    }
+  },
+  {
+    "page_content": "20 | P a g e \n \n4. Implementation Details: \no UNIX: Uses 9 permission bits (rwx for each class), with optional ACLs \nindicated by a “+” sign in listings. \no Solaris: Uses commands like setfacl and getfacl. \no Windows: Uses a GUI to manage ACLs and permissions. \n5. Permission Conflicts: \no When ACLs and standard group permissions conflict, ACLs take \nprecedence, as they provide more specific rules. \nACLs provide flexible and detailed control over file access, while user \nclassifications (owner, group, other) simplify standard permission settings. Most \nsystems combine both approaches for efficiency and fine -tuned security, with \nACLs overriding default permissions when conflicts arise. \n \nOther protection approaches \n Another approach to the protection problem is to associate a password with \neach file. Just as access to the computer system is often controlled by a password \naccess to each file can be controlled in the same way. If the passwords are chosen",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 17,
+      "page_label": "18",
+      "start_index": 0,
+      "chunk_id": 34,
+      "chunk_size": 970
+    }
+  },
+  {
+    "page_content": "each file. Just as access to the computer system is often controlled by a password \naccess to each file can be controlled in the same way. If the passwords are chosen \nrandomly and changed often, this scheme may be effective in limiting access to a \nfile. The use of passwords has a few disadvantages however. First, the number of \npasswords that a user needs to remember may become large, making the scheme \nimpractical. Second, if only one password is used  for all the files then once it is \ndiscovered all files are accessible protection is on an all -or-none basis. Some \nsystems allow a user to associate a password with a subdirectory rather than with \nan individual file to address this problem. In a multilevel directory structure, we \nneed to protect not only individual fi les but also collections of files in \nsubdirectories; that is, we need to provide a mechanism for directory protection. \nThe directory operations that must be protected are somewhat different from the",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 17,
+      "page_label": "18",
+      "start_index": 804,
+      "chunk_id": 35,
+      "chunk_size": 984
+    }
+  },
+  {
+    "page_content": "subdirectories; that is, we need to provide a mechanism for directory protection. \nThe directory operations that must be protected are somewhat different from the \nfile operations. We want to control the creation and deletion of files in a directory. \nIn addition, we probably want to control whether a user can determine the",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 17,
+      "page_label": "18",
+      "start_index": 1626,
+      "chunk_id": 36,
+      "chunk_size": 325
+    }
+  },
+  {
+    "page_content": "21 | P a g e \n \nexistence of a file in a directory. Sometimes knowledge of the existence and name \nof a file is significant in itself.  \nThus, listing the contents of a directory must be a protected operation. \nSimilarly, if a path name refers to a file in a directory, the user must be allowed \naccess to both the directory and the file. In systems where files may have \nnumerous path names (such as acyclic and general graphs), a given user may \nhave different access rights to a particular file, depending on the path name \nused.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 18,
+      "page_label": "19",
+      "start_index": 0,
+      "chunk_id": 37,
+      "chunk_size": 532
+    }
+  },
+  {
+    "page_content": "22 | P a g e \n \nMemory mapped files \n There is one other method of accessing files, and it is very commonly used. \nConsider a sequential read of a file on disk using the standard system calls open(), \nread(),andwrite(). Each file access requires a system call and disk access. \nAlternatively, we c an use the virtual memory techniques in to treat file I/O as \nroutine memory accesses. This approach, known as memory mapping a file, allows \na part of the virtual address space to be logically associated with the file. As we \nshall see, this can lead to significant performance increases. \n \nBasic mechanism \nMemory-mapped files are a powerful mechanism used by modern operating \nsystems to optimize file access and enable interprocess communication. Instead \nof reading and writing files through traditional system calls like read() and write(), \nmemory mapping allows a file to be directly mapped into the virtual memory",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 19,
+      "page_label": "20",
+      "start_index": 0,
+      "chunk_id": 38,
+      "chunk_size": 921
+    }
+  },
+  {
+    "page_content": "of reading and writing files through traditional system calls like read() and write(), \nmemory mapping allows a file to be directly mapped into the virtual memory \nspace of a process. This approach not only improves performance by eliminating \nthe overhead of frequent system calls but also simplifies file manipulation by \ntreating file content as if it were part of the main memory. \nWhen a file is memory -mapped, the operating system links disk blocks to \npages in virtual memory. The first time a part of the file is accessed, a page fault \noccurs, prompting the OS to load that portion of the file from disk into a physical \nmemory page. Su bsequent accesses are handled like ordinary memory \noperations. Writes to the file, however, are not immediately saved to disk. Instead, \nthey are temporarily stored in memory and only written back to disk either when \nthe file is closed or under memory pressure, ensuring data is not lost.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 19,
+      "page_label": "20",
+      "start_index": 759,
+      "chunk_id": 39,
+      "chunk_size": 937
+    }
+  },
+  {
+    "page_content": "they are temporarily stored in memory and only written back to disk either when \nthe file is closed or under memory pressure, ensuring data is not lost. \nDifferent operating systems implement memory mapping in different ways. \nFor instance, Solaris automatically memory-maps files, whether they are accessed \nthrough explicit memory -mapping system calls (like mmap()) or through \ntraditional file access methods. If accessed through standard system calls, Solaris \nmaps the file to the kernel address space, while memory-mapped files are placed \nin the process address space. In either case, the file I/O benefits from the speed \nand efficiency of memory operations.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 19,
+      "page_label": "20",
+      "start_index": 1544,
+      "chunk_id": 40,
+      "chunk_size": 667
+    }
+  },
+  {
+    "page_content": "23 | P a g e \n \nAn important advantage of memory -mapped files is their ability to enable \ndata sharing between processes. When multiple processes map the same file, they \nshare the same physical memory pages, so changes made by one process can be \ninstantly seen by the others. This sharing mechanism can be controlled using \nmutual exclusion methods to ensure consistency and sy nchronization. \nAdditionally, copy-on-write can be used to allow multiple processes to share read-\nonly access while creating separate memory copies if any  process attempts to \nmodify the data. \nBeyond file access, memory mapping also plays a vital role in interprocess \ncommunication (IPC). Shared memory segments are often created by memory -\nmapping files into the address space of communicating processes. This technique \nprovides an efficient way for processes to exchange information by reading and \nwriting to a common memory region without the need for slower I/O operations.",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 20,
+      "page_label": "21",
+      "start_index": 0,
+      "chunk_id": 41,
+      "chunk_size": 965
+    }
+  },
+  {
+    "page_content": "provides an efficient way for processes to exchange information by reading and \nwriting to a common memory region without the need for slower I/O operations. \nmemory-mapped files streamline file access and enhance performance by \nreducing system call overhead and enabling direct memory manipulation. They \nalso provide a foundation for efficient shared memory, facilitating fast and simple \ncommunication between proc esses. By integrating file I/O and memory \nmanagement, memory mapping is a key feature in modern operating systems that \nsupports both performance optimization and process collaboration. \n \nShared memory in the window API \n The general outline for creating a region of shared memory using memory \nmappedfiles in the Windows API involves first creating a fil mapping for the file \nto be mapped and then establishing a view of the mapped file in a process’s \nvirtual address space. A second process can then open and create a view of the",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 20,
+      "page_label": "21",
+      "start_index": 808,
+      "chunk_id": 42,
+      "chunk_size": 954
+    }
+  },
+  {
+    "page_content": "to be mapped and then establishing a view of the mapped file in a process’s \nvirtual address space. A second process can then open and create a view of the \nmapped file in its virtual address space. The mapped file represents the shared-\nmemory object that will enable communication to take place between the \nprocesses \n We next illustrate these steps in more detail. In this example, a producer \nprocess first creates a shared-memory object using the memory-mapping fea",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 20,
+      "page_label": "21",
+      "start_index": 1607,
+      "chunk_id": 43,
+      "chunk_size": 471
+    }
+  },
+  {
+    "page_content": "24 | P a g e \n \ntures available in the Windows API. The producer then writes a message to \nshared memory. After that a consumer process opens a mapping to the shared \nmemory object and reads the message written by the consumer \n             \n Memory mapped files                               shared memory using memory mapped I/O",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 21,
+      "page_label": "22",
+      "start_index": 0,
+      "chunk_id": 44,
+      "chunk_size": 330
+    }
+  },
+  {
+    "page_content": "25 | P a g e \n \nReferences  \nOperating system concepts tenth edition by ABRAHAM SILBERSCHATZ, PETER \nBAER GALVIN, GREG GAGNE \nOperating system concepts ninth edition by ABRAHAM SILBERSCHATZ, PETER \nBAER GALVIN, GREG GAGNE \nModern operating system fourth edition by ANDREW S. TANENBAUM HERBERT \nBOS \ninternet",
+    "metadata": {
+      "producer": "iLovePDF",
+      "creator": "PyPDF",
+      "creationdate": "",
+      "moddate": "2025-05-21T09:16:07+00:00",
+      "source": "/mnt/hdd/bini/nsk/rag-ai/data/inbox/test.pdf",
+      "total_pages": 23,
+      "page": 22,
+      "page_label": "23",
+      "start_index": 0,
+      "chunk_id": 45,
+      "chunk_size": 307
+    }
+  }
+]
