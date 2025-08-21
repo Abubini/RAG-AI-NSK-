@@ -7,18 +7,22 @@ try:
     import sqlite3
     sys.modules["sqlite3"] = pysqlite3
 except ImportError:
-    # pysqlite3 not installed yet, will fail later if Chroma tries to use sqlite
     pass
+
 import os
+import streamlit as st
+
 def get_env_var(key, default=None):
     return os.getenv(key) or st.secrets.get(key, default)
 
-if "STREAMLIT_SERVER" in os.environ:
+# ✅ Fix: detect cloud deployment correctly
+if os.environ.get("STREAMLIT_RUNTIME"):  # Running on Streamlit Cloud
     PERSIST_DIR = "/tmp/chroma_data"
 else:
     PERSIST_DIR = get_env_var("PERSIST_DIR", "./data/chroma")
 
-import streamlit as st
+os.makedirs(PERSIST_DIR, exist_ok=True)
+
 import json
 import tempfile
 from pathlib import Path
